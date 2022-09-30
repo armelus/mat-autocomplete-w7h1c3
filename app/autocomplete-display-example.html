@@ -1,0 +1,61 @@
+<div class="example-form">
+  <p>@Input('class') classList string</p>
+  <form>
+    <mat-form-field class="example-full-width">
+      <input
+        type="text"
+        placeholder="Choose one option"
+        aria-label="Choose one option"
+        matInput
+        [matAutocomplete]="auto1"
+      />
+      <mat-autocomplete #auto1="matAutocomplete" [class]="'blue-bg'">
+        <mat-option *ngFor="let option of simpleOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <p>@Input() displayWith ((value: any) => string) | null</p>
+  <form>
+    <mat-form-field class="example-full-width">
+      <input
+        type="text"
+        placeholder="Assignee"
+        aria-label="Assignee"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto2"
+      />
+      <mat-autocomplete #auto2="matAutocomplete" [displayWith]="displayFn">
+        <mat-option
+          *ngFor="let option of userOptions$ | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <p>@Output() optionSelected EventEmitter</p>
+  <form>
+    <mat-form-field class="example-full-width">
+      <input
+        type="text"
+        placeholder="Choose one option"
+        aria-label="Choose one option"
+        matInput
+        [matAutocomplete]="auto1"
+      />
+      <mat-autocomplete
+        #auto1="matAutocomplete"
+        (optionSelected)="updateSelectedOption($event)"
+      >
+        <mat-option *ngFor="let option of simpleOptions" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <p>Is option selected :: {{selectedOption}}</p>
+</div>
