@@ -35,12 +35,13 @@ export class AutocompleteDisplayExample {
 
   filterValue(name: string): void {
     this.userOptions$ = this.userOptions$.pipe(
-      tap((s) => console.log(s)),
+      tap((input) => console.log('input: ', input)),
       map((users: User[]) =>
         users.filter((user) =>
           user.name.toLowerCase().includes(name.trim().toLowerCase())
         )
-      )
+      ),
+      tap((result) => console.log('result: ', result))
     );
   }
 
